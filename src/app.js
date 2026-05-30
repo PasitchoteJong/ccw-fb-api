@@ -2,8 +2,6 @@ import express from 'express'
 import authRoute from './routes/auth.routes.js'
 import createHttpError from 'http-errors'
 
-
-
 const app = express()
 app.use(express.json())
 

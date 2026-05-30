@@ -1,12 +1,27 @@
 GET http://localhost:8899/api/like
 ###
-POST http://localhost:8899/api/auth/register HTTP/1.1
+POST http://localhost:8899/api/auth/login HTTP/1.1
 content-type: application/json
 
 {
  "identity" : "andy@cc20.th",
  "password" : "a1234"
 }
+###
+
+# Register api
+POST http://localhost:8899/api/auth/register HTTP/1.1
+content-type: application/json
+
+{
+ # "identity" : "1234567890",
+ "identity" : "someone@ggg.mail",
+ "firstName" : "someone",
+ "lastName" : "codecamp",
+ "password" : "123456",
+ "confirmPassword" : "123456"
+}
+
 
 ###
 POST http://localhost:8899/api/post HTTP/1.1
