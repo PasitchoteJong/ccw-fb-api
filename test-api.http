@@ -14,12 +14,12 @@ POST http://localhost:8899/api/auth/register HTTP/1.1
 content-type: application/json
 
 {
- # "identity" : "1234567890",
- "identity" : "someone@ggg.mail",
- "firstName" : "someone",
- "lastName" : "codecamp",
+#   "identity" : "12345678901",
+ "identity" : "someone007@ggg.mail",
+ "firstName" : "Weekend",
+ "lastName" : "CodeCamp",
  "password" : "123456",
- "confirmPassword" : "123456"
+ "confirmPassword" : "12346"
 }
 
 

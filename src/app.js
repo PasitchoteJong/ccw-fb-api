@@ -1,6 +1,7 @@
 import express from 'express'
 import authRoute from './routes/auth.routes.js'
 import createHttpError from 'http-errors'
+import errorMiddleware from './middlewares/error.middleware.js'
 
 const app = express()
 app.use(express.json())
@@ -21,14 +22,7 @@ app.use((req,res,next)=>{
     // })
 })
 
-app.use( (err,req,res,next) => {
-   console.error(err)
-   res.status(err.status || 500)
-   res.json({
-       status: err.status || 500,
-       message: err.message || 'Internal Server Error',
- })
-})
+app.use(errorMiddleware)
 
 
 export default app
