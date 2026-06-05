@@ -1,11 +1,14 @@
+import { ZodError } from "zod"
+
 export default (err, req, res, next) => {
-    if (err.name === 'ZodError') {
+    if (err instanceof ZodError) {
         return res.status(400).json({
             success: false,
-            errors: err.issues
+            errors: err.flatten().fieldErrors
             // errors: err.issues.map(err => err.message)
         })
     }
+    console.error(err)
     res.status(err.status || 500)
     res.json({
         status: err.status || 500,
