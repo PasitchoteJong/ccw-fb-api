@@ -1,10 +1,16 @@
+# Get Me
+GET http://localhost:8899/api/auth/me HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzgwNzI4Nzg2LCJleHAiOjE3ODIwMjQ3ODZ9.gwRY4ChFGf67kMgrLI9u6i9i0HguNM3TdKALSPX0Scw
+###
+
 GET http://localhost:8899/api/like
 ###
 POST http://localhost:8899/api/auth/login HTTP/1.1
 content-type: application/json
 
 {
- "identity" : "someone009@ggg.mail",
+#  "identity" : "someone009@ggg.mail",
+ "identity" : "1111111111",
  "password" : "123456"
 }
 ###
@@ -14,17 +20,18 @@ POST http://localhost:8899/api/auth/register HTTP/1.1
 content-type: application/json
 
 {
-#   "identity" : "123456789",
- "identity" : "someone123@ggg.mail",
- "firstName" : "Weekended",
+ "identity" : "1234567898",
+#  "identity" : "someone123@ggg.mail",
+ "firstName" : "",
  "lastName" : "CodeCamp",
  "password" : "123456",
- "confirmPassword" : "123456"
+ "confirmPassword" : "12346"
 }
 
 
 ###
 POST http://localhost:8899/api/post HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzgwNzI4Nzg2LCJleHAiOjE3ODIwMjQ3ODZ9.gwRY4ChFGf67kMgrLI9u6i9i0HguNM3TdKALSPX0Scw
 content-type: application/json
 
 {

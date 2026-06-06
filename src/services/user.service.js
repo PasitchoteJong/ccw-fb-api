@@ -9,6 +9,6 @@ export async function getUserBy(field, value) {
 // getUserBy('id','3').then(console.log)
 // getUserBy('firstName','gee').then(console.log)
 
-export async function createUser(data) {
-    return await prisma.user.create({ data })
+export async function createUser(userData) {
+    return await prisma.user.create({ data: userData })
 }

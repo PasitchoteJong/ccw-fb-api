@@ -11,7 +11,7 @@ import { createUser, getUserBy } from '../services/user.service.js'
 export async function register(req, res, next) {
     // validation
     const data = await registerSchema.parseAsync(req.body)
-    console.log('data =', data)
+    // console.log('data =', data)
     //check identity is email or mobile
     const identityKey = data.email ? 'email' : 'mobile'
 
@@ -43,17 +43,18 @@ export async function register(req, res, next) {
 
 
 export async function login(req, res, next) {
-    const data = loginSchema.parse(req.body)
+    const data = loginSchema.parse(req.body)// ที่ไม่ใช้ parrseAsync เพราะว่าใน schema ไม่มี await เลยไม่ต้องใช้
     const identityKey = data.email ? 'email' : 'mobile'
     // find this user
-    const foundUser = await prisma.user.findFirst({
-        where: { [identityKey]: data[identityKey] }
-    })
+    // const foundUser = await prisma.user.findFirst({
+    //     where: { [identityKey]: data[identityKey] }
+    // })
+    const foundUser = await getUserBy(identityKey, data[identityKey])
     if (!foundUser) {
         return next(createHttpError[401]('Invalid Login 1'))
     }
     //check password
-    let pwOk = await bcrypt.compare(data.password, foundUser.password)
+    const pwOk = await bcrypt.compare(data.password, foundUser.password)
     if (!pwOk) {
         return next(createHttpError[401]('Invalid Login 2'))
     }
@@ -64,17 +65,16 @@ export async function login(req, res, next) {
         expiresIn: '15d'
     })
     //rip off -password, createdAt, updatedAt
-    const { password, createdAt, updatedAt, ...userInfo } = foundUser
+    const { password, createdAt, updatedAt, ...userData } = foundUser
 
     res.json({
         message: 'Login controller',
         token: token,
-        user: userInfo
+        // user: foundUser
+        user: userData
     })
 }
 
-// maybe 
-export async function getMe(req, res, next) {
-    console.log(x)
-    res.send('GetMe Controller')
+export function getMe(req, res, next) {
+    res.json({user: req.user})
 }
