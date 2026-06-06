@@ -4,6 +4,9 @@ import { prisma } from '../lib/prisma.js'
 import bcrypt from 'bcryptjs'
 import { loginSchema, registerSchema } from '../validations/schema.js'
 import jwt from 'jsonwebtoken'
+import { createUser, getUserBy } from '../services/user.service.js'
+
+
 
 export async function register(req, res, next) {
     // validation
@@ -11,18 +14,19 @@ export async function register(req, res, next) {
     console.log('data =', data)
     //check identity is email or mobile
     const identityKey = data.email ? 'email' : 'mobile'
-    console.log('identityKey =', identityKey)
 
     // find user for non-duplicate
-    const haveUser = await prisma.user.findUnique({
-        where: { [identityKey]: data[identityKey] }
-    })
+    // const haveUser = await prisma.user.findUnique({
+    //     where: { [identityKey]: data[identityKey] }
+    // })
+    const haveUser = await getUserBy(identityKey, data[identityKey])
+
 
     if (haveUser) {
         return next(createHttpError[409]('This user already register'))
     }
 
-    const result = await prisma.user.create({ data })
+    const result = await createUser(data)
 
     const userInfo = {
         id: result.id,

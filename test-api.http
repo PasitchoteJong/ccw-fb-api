@@ -15,8 +15,8 @@ content-type: application/json
 
 {
 #   "identity" : "123456789",
- "identity" : "someone009@ggg.mail",
- "firstName" : "Weekend",
+ "identity" : "someone123@ggg.mail",
+ "firstName" : "Weekended",
  "lastName" : "CodeCamp",
  "password" : "123456",
  "confirmPassword" : "123456"
